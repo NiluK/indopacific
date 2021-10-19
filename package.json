@@ -1,19 +1,30 @@
 {
-  "name": "html-tailwind-starter",
+  "name": "indopacific-mvp",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "postcss styles.css -o src/styles.css",
-    "dev": "npm run build && live-server src --port=8080"
+    "postcss:watch": "postcss src/styles.pcss -o src/styles.css --env development -w",
+    "postcss:build": "postcss src/styles.pcss -o src/styles.css --env production",
+    "parcel:serve": "parcel src/index.html",
+    "parcel:watch": "parcel watch src/index.html",
+    "parcel:build": "parcel build src/index.html --public-url ./",
+    "clean": "rm -rf dist .cache",
+    "build": "npm-run-all -s clean postcss:build parcel:build",
+    "start": "npm-run-all -s clean -p postcss:watch parcel:serve"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "autoprefixer": "^10.2.4",
+    "global": "^4.4.0",
+    "live-server": "^1.2.1",
+    "npm-run-all": "^4.1.5",
     "postcss-cli": "^8.3.1",
     "tailwindcss": "^2.0.3"
+  },
+  "devDependencies": {
+    "parcel": "^2.0.0"
   }
 }
